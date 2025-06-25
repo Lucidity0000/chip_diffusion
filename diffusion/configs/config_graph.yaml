@@ -9,7 +9,7 @@ defaults:
   - override hydra/job_logging: stdout
 
 family: continuous_diffusion
-task: placement-mini-v5
+task: v1.61
 num_classes: 10
 method: debug_att_gnn
 seed: 61
