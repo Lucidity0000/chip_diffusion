@@ -94,7 +94,6 @@ def cluster_lefdef(lef_path, def_path, out_dir, pickle_out_dir=None, pickle_idx=
     if is_skip:
         print(f"Output LEF/DEF at {out_dir} and pickles at {pickle_out_dir} already exist for {def_path.name}.")
         # load pickle and generate metrics
-        # TODO load original graph too to get original vertices and edges
         metrics = {}
         if pickle_out_dir is not None:
             clustered_graph = utils.open_pickle(pickle_graph_path)
@@ -124,9 +123,9 @@ def cluster_lefdef(lef_path, def_path, out_dir, pickle_out_dir=None, pickle_idx=
     placement = torch.tensor(parse_utils.get_locations(components, chip_size, "N"))
 
     placement, data_obj = utils.preprocess_graph(placement, data_obj)
-    debug_plot(placement, data_obj, f"logs/temp/debug_{pathlib.Path(def_path).name}.png")
+    # debug_plot(placement, data_obj, f"logs/temp/debug_{pathlib.Path(def_path).name}.png")
     clustered_graph, clustered_placement = cluster_fn(data_obj, num_clusters, ubfactor = cluster_ubfactor, temp_dir = "logs/temp", verbose = verbose, placements = placement.unsqueeze(dim=0), algorithm = cluster_algorithm)
-    debug_plot(clustered_placement.squeeze(dim=0), clustered_graph, f"logs/temp/debug_clustered_{pathlib.Path(def_path).name}.png")
+    # debug_plot(clustered_placement.squeeze(dim=0), clustered_graph, f"logs/temp/debug_clustered_{pathlib.Path(def_path).name}.png")
     clustered_placement, clustered_graph = utils.postprocess_placement(clustered_placement, clustered_graph, process_graph=True)
 
     # write clustered graphs to pickle if needed

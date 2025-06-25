@@ -5,9 +5,9 @@ defaults:
 
 benchmark_dir: benchmarks/ibm
 out_dir: benchmarks
-pickle_out_dir: datasets/clustered
+pickle_out_dir: datasets/graph
 placement_dir: null
-name: test
+name: v1
 mode: remove_first
 cluster_algorithm: hmetis
 limit: -1
