@@ -1,4 +1,4 @@
-# Chip Placement with Diffusion Models
+# Chip Placement Using Diffusion Models
 
 Vint Lee, Minh Nguyen, Leena Elzeiny, Chun Deng, Pieter Abbeel, John Wawrzynek
 
@@ -15,7 +15,7 @@ conda activate chipdiffusion
 
 Training and evaluation experiments will log data to Weights & Biases by default. Set your name and W&B project in the [config](diffusion/configs) files using the `logger.wandb_entity` and `logger.wandb_project` options before running the commands below. Turn off W&B logging by appending `logger.wandb=False` to the commands below.
 
-For running evaluations that require clustering, download [shmetis](http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview) and [hmetis](http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview), then place them in the repo's root directory. You may have to run `chmod +x` to allow the programs to run.
+For running evaluations that require clustering, download [shmetis and hmetis](http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview) and place in the repo's root directory.
 
 
 ## Directory Structure
@@ -85,12 +85,12 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py task=v1.61 method=e
 
 Evaluating zero-shot on clustered IBM benchmark with guidance:
 ```
-CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_guided task=ibm-cluster512 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt num_output_samples=18
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_guided task=ibm.cluster512.v1 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt num_output_samples=18
 ```
 
 Macro-only evaluation for IBM and ISPD benchmarks:
 ```
-CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_macro_only task=ibm-cluster512 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt legalizer@_global_=opt-adam num_output_samples=18 model.grad_descent_steps=20 model.hpwl_guidance_weight=16e-4 legalization.alpha_lr=8e-3 legalization.hpwl_weight=12e-5 legalization.legality_potential_target=0 legalization.grad_descent_steps=20000 macros_only=True
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_macro_only task=ibm.cluster512.v1 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt legalizer@_global_=opt-adam num_output_samples=18 model.grad_descent_steps=20 model.hpwl_guidance_weight=16e-4 legalization.alpha_lr=8e-3 legalization.hpwl_weight=12e-5 legalization.legality_potential_target=0 legalization.grad_descent_steps=20000 macros_only=True
 
 
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_macro_only task=ispd2005 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt legalizer@_global_=opt-adam guidance@_global_=opt num_output_samples=8 model.grad_descent_steps=20 model.hpwl_guidance_weight=16e-4 legalization.alpha_lr=8e-3 legalization.hpwl_weight=12e-5 legalization.legality_potential_target=0 legalization.grad_descent_steps=20000 macros_only=True
@@ -116,16 +116,17 @@ The code will parse the DEF/LEFs, cluster the netlists if `num_clusters` is non-
 
 To obtain the ISPD dataset for running evaluations, download the ISPD benchmark in bookshelf format to `benchmarks/ispd2005`, then use [this notebook](notebooks/parse_bookshelf.ipynb).
 
+Once the benchmark files have been generated, copy [this config](datasets/graph/config.yaml) into the benchmark directory, and change `val_samples` as needed.
+
 ## Citation
 If you found our work useful, please cite:
 ```
-@misc{lee2025chipdiffusion,
-      title={Chip Placement with Diffusion Models}, 
+@inproceedings{
+      lee2025chipdiffusion,
+      title={Chip Placement with Diffusion Models},
       author={Vint Lee and Minh Nguyen and Leena Elzeiny and Chun Deng and Pieter Abbeel and John Wawrzynek},
+      booktitle={Forty-second International Conference on Machine Learning},
       year={2025},
-      eprint={2407.12282},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2407.12282}, 
+      url={https://arxiv.org/abs/2407.12282}
 }
 ```

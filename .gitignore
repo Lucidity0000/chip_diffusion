@@ -1,7 +1,8 @@
 __pycache__
 .DS_Store
 .vscode
-datasets/*
+datasets/graph/*
+!datasets/graph/config.yaml
 wandb/
 logs/
 venv/
