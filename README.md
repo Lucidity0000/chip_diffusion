@@ -118,6 +118,11 @@ To obtain the ISPD dataset for running evaluations, download the ISPD benchmark 
 
 Once the benchmark files have been generated, copy [this config](datasets/graph/config.yaml) into the benchmark directory, and change `val_samples` as needed.
 
+## Pre-trained Models
+For convenience, we provide the training checkpoint for the *Large+v2* model at [this link](https://drive.google.com/drive/folders/16b8RkVwMqcrlV_55JKwgprv-DevZOX8v?usp=sharing). To use it, copy the `large-v2` directory into your `logs` directory and specify `from_checkpoint` accordingly when running the commands above. 
+
+Note that if the checkpoint loads correctly, the code will print `successfully loaded state dict for model` before running training or evaluation; otherwise, `successfully loaded model` will be printed instead, and the code will default to random model weights. Hyperparameter mismatch is a common cause of failure, and we provide the training config used for reference.
+
 ## Citation
 If you found our work useful, please cite:
 ```
