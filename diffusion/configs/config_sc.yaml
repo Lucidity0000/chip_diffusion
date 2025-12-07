@@ -20,8 +20,8 @@ from_samples: ibm-cluster512.5_eval_cluster512.61
 logger:
   filter: '.*'
   wandb: True
-  wandb_entity: <your name here>
-  wandb_project: <your project here>
+  wandb_entity: limpidity
+  wandb_project: EDA_Placement_Diffusion
 
 # model params
 implementation: custom

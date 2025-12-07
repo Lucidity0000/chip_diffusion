@@ -21,8 +21,8 @@ param_sweep: False # set to true when using with wandb sweeps, to ignore run nam
 logger:
   filter: '.*'
   wandb: True
-  wandb_entity: <your name here>
-  wandb_project: <your project here>
+  wandb_entity: limpidity
+  wandb_project: EDA_Placement_Diffusion
 
 # model params
 implementation: custom
