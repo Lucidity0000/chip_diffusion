@@ -20,8 +20,8 @@ from_checkpoint: none
 logger:
   filter: '.*'
   wandb: True
-  wandb_entity: limpidity
-  wandb_project: EDA_Placement_Diffusion
+  wandb_entity: "limpidity-national-taiwan-university"
+  wandb_project: "EDA_Placement_Diffusion"
 
 # model params
 implementation: custom
