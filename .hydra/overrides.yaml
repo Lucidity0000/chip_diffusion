@@ -1,0 +1,5 @@
+- task=vertex_0.7x.61
+- sa_mode=hybrid
+- seed=0
+- sa_steps=1000
+- val_data_limit=10

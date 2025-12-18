@@ -1,0 +1,45 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: none
+  - override hydra/job_logging: stdout
+
+# SA / diffusion hybrid settings
+task: test
+sa_mode: hybrid         # hybrid | sa_only | diffusion_only
+sa_steps: 500
+temp_init: 1.0
+temp_decay: 0.995
+jitter_std: 0.02
+move_probs:
+  swap: 0.5
+  jitter: 0.5
+random_init: false
+seed: 0
+train_data_limit: null
+val_data_limit: null
+log_dir: logs
+
+weights:
+  hpwl: 0.01
+  legality: 1.0
+  macro_legality: 1.0
+  congestion: 0.0
+
+diffusion:
+  mode: cond
+  k_steps: 8
+  noise_level: 0.1
+  interval: 25
+  intermediate_every: 0
+  model_path: "d:/eda_final/chip_diffusion/logs/diffusion_debug/large-v2/large-v2.ckpt"
+
+congestion:
+  use_rudy: false
+  weight: 0.0
+
+hydra:
+  run:
+    dir: .
+  sweep:
+    dir: .
+    subdir: .

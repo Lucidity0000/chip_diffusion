@@ -19,7 +19,7 @@ from_samples: ibm-cluster512.5_eval_cluster512.61
 
 logger:
   filter: '.*'
-  wandb: True
+  wandb: False
   wandb_entity: "limpidity-national-taiwan-university"
   wandb_project: "EDA_Placement_Diffusion"
 
