@@ -17,7 +17,6 @@ Training and evaluation experiments will log data to Weights & Biases by default
 
 For running evaluations that require clustering, download [shmetis and hmetis](http://glaros.dtc.umn.edu/gkhome/metis/hmetis/overview) and place in the repo's root directory.
 
-
 ## Directory Structure
 * [diffusion](diffusion) contains code for training, fine-tuning, and evaluating models
 * [data-gen](data-gen) contains code for generating synthetic datasets
@@ -25,6 +24,11 @@ For running evaluations that require clustering, download [shmetis and hmetis](h
 * [datasets](datasets) is used for other datasets (like IBM and ISPD benchmarks).
 * [notebooks](notebooks) has useful scripts and functions for evaluating placements (measuring congestion in particular) and inspecting benchmark files.
 * [parsing](parsing) has scripts for converting and clustering benchmarks in the DEF/LEF format (such as IBM).
+
+## Local Setup Status
+* Pre-trained `large-v2` checkpoint is already available locally; ensure PyTorch and torchvision are installed with CUDA-compatible versions before running GPU jobs.
+* ISPD2005 benchmark files are installed and ready for evaluation.
+* Generated datasets currently live under `data-gen/outputs`: `v0.61` and `vertex_0.7x.61`.
 
 ## Usage
 
@@ -94,6 +98,11 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_macro_o
 
 
 CUDA_VISIBLE_DEVICES=0 PYTHONPATH=. python diffusion/eval.py method=eval_macro_only task=ispd2005 from_checkpoint=v2.61.finetune_large.61/step_250000.ckpt legalizer@_global_=opt-adam guidance@_global_=opt num_output_samples=8 model.grad_descent_steps=20 model.hpwl_guidance_weight=16e-4 legalization.alpha_lr=8e-3 legalization.hpwl_weight=12e-5 legalization.legality_potential_target=0 legalization.grad_descent_steps=20000 macros_only=True
+```
+
+Running the installed pre-trained checkpoint on the ISPD2005 benchmark (macro-only):
+```
+python diffusion/eval.py method=eval_macro_only task=ispd2005-s0 from_checkpoint=large-v2/large-v2.ckpt legalizer@_global_=opt-adam guidance@_global_=opt num_output_samples=8 model.grad_descent_steps=20 model.hpwl_guidance_weight=16e-4 legalization.alpha_lr=8e-3 legalization.hpwl_weight=12e-5 legalization.legality_potential_target=0 legalization.grad_descent_steps=20000 macros_only=True
 ```
 
 Examples of generated placements, for both clustered and macro-only settings, can be found [here](placements).
