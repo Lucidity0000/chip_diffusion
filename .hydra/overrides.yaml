@@ -1,5 +1,7 @@
-- task=vertex_0.7x.61
+- task=ispd2005-s0
 - sa_mode=hybrid
-- seed=0
-- sa_steps=1000
-- val_data_limit=10
+- sa_steps=500
+- temp_init=1.0
+- temp_decay=0.995
+- diffusion.k_steps=8
+- diffusion.noise_level=0.1

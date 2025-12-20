@@ -1,6 +1,6 @@
-task: vertex_0.7x.61
+task: ispd2005-s0
 sa_mode: hybrid
-sa_steps: 1000
+sa_steps: 500
 temp_init: 1.0
 temp_decay: 0.995
 jitter_std: 0.02
@@ -10,7 +10,7 @@ move_probs:
 random_init: false
 seed: 0
 train_data_limit: null
-val_data_limit: 10
+val_data_limit: null
 log_dir: logs
 weights:
   hpwl: 0.01

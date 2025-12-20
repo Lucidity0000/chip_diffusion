@@ -1,6 +1,7 @@
 # Chip Placement Using Diffusion Models
 
 Vint Lee, Minh Nguyen, Leena Elzeiny, Chun Deng, Pieter Abbeel, John Wawrzynek
+This repository is adapted from the original work at https://github.com/vint-1/chipdiffusion (“Chip Placement Using Diffusion Models” by Vint Lee, Minh Nguyen, Leena Elzeiny, Chun Deng, Pieter Abbeel, and John Wawrzynek).
 
 [Paper](https://arxiv.org/abs/2407.12282)
 
@@ -11,6 +12,10 @@ Use conda environment found in `environment.yaml`
 ```
 conda env create -f environment.yaml
 conda activate chipdiffusion
+```
+On Windows PowerShell, set `PYTHONPATH` before running any repo commands:
+```
+$env:PYTHONPATH="."
 ```
 
 Training and evaluation experiments will log data to Weights & Biases by default. Set your name and W&B project in the [config](diffusion/configs) files using the `logger.wandb_entity` and `logger.wandb_project` options before running the commands below. Turn off W&B logging by appending `logger.wandb=False` to the commands below.
@@ -106,6 +111,26 @@ python diffusion/eval.py method=eval_macro_only task=ispd2005-s0 from_checkpoint
 ```
 
 Examples of generated placements, for both clustered and macro-only settings, can be found [here](placements).
+
+### Simulated Annealing + Diffusion Hybrid
+`diffusion/sa_hybrid.py` runs simulated annealing with optional diffusion moves (if you provide a checkpoint that supports `reverse_samples`). Outputs live in `logs/<task>.sa_hybrid.<seed>/samples`.
+
+Example (PowerShell):
+```
+$env:PYTHONPATH="."
+python diffusion/sa_hybrid.py task=ispd2005-s0 sa_mode=hybrid sa_steps=500 temp_init=1.0 temp_decay=0.995 diffusion.k_steps=8 diffusion.noise_level=0.1
+```
+Use `sa_mode=sa_only` to disable diffusion moves, or set `diffusion.model_path` to point at a saved model.
+
+### Visualize Placement Pickles
+`scripts/visualize_placement_pkls.py` renders placement `.pkl` files (from `eval.py` or `sa_hybrid.py`) to PNGs, matching them with the corresponding graph metadata.
+
+Example (PowerShell):
+```
+$env:PYTHONPATH="."
+python scripts/visualize_placement_pkls.py --task vertex_0.7x.61 --pkl logs/vertex_0.7x.61.sa_hybrid.0/samples/best0.pkl --save-ref
+```
+Use `--pkl-dir` with `--pattern "best*.pkl"` to batch-convert a folder.
 
 ## Dataset Format
 Input netlist is stored using PyTorch-Geometric's [Data](https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Data.html#torch-geometric-data-data) object.

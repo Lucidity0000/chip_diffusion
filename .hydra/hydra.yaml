@@ -93,15 +93,17 @@ hydra:
     hydra:
     - hydra.mode=RUN
     task:
-    - task=vertex_0.7x.61
+    - task=ispd2005-s0
     - sa_mode=hybrid
-    - seed=0
-    - sa_steps=1000
-    - val_data_limit=10
+    - sa_steps=500
+    - temp_init=1.0
+    - temp_decay=0.995
+    - diffusion.k_steps=8
+    - diffusion.noise_level=0.1
   job:
     name: sa_hybrid
     chdir: null
-    override_dirname: sa_mode=hybrid,sa_steps=1000,seed=0,task=vertex_0.7x.61,val_data_limit=10
+    override_dirname: diffusion.k_steps=8,diffusion.noise_level=0.1,sa_mode=hybrid,sa_steps=500,task=ispd2005-s0,temp_decay=0.995,temp_init=1.0
     id: ???
     num: ???
     config_name: config_sa_hybrid
