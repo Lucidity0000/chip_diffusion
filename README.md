@@ -1,9 +1,15 @@
-# Chip Placement Using Diffusion Models
+# Chip Placement Using Simulated Annealing + Diffusion Models
 
-Vint Lee, Minh Nguyen, Leena Elzeiny, Chun Deng, Pieter Abbeel, John Wawrzynek
 This repository is adapted from the original work at https://github.com/vint-1/chipdiffusion (“Chip Placement Using Diffusion Models” by Vint Lee, Minh Nguyen, Leena Elzeiny, Chun Deng, Pieter Abbeel, and John Wawrzynek).
 
-[Paper](https://arxiv.org/abs/2407.12282)
+@inproceedings{
+      lee2025chipdiffusion,
+      title={Chip Placement with Diffusion Models},
+      author={Vint Lee and Minh Nguyen and Leena Elzeiny and Chun Deng and Pieter Abbeel and John Wawrzynek},
+      booktitle={Forty-second International Conference on Machine Learning},
+      year={2025},
+      url={https://arxiv.org/abs/2407.12282}
+}
 
 ![Teaser](/media/teaser.png "Diffusion process used to generate placement")
 
@@ -152,24 +158,11 @@ PYTHONPATH=. python parsing/cluster.py num_clusters=0
 ```
 The code will parse the DEF/LEFs, cluster the netlists if `num_clusters` is non-zero, then output the dataset as pickle files to `datasets/clustered` directory.
 
-To obtain the ISPD dataset for running evaluations, download the ISPD benchmark in bookshelf format to `benchmarks/ispd2005`, then use [this notebook](notebooks/parse_bookshelf.ipynb).
+To obtain the ISPD dataset for running evaluations, download the ISPD benchmark in bookshelf format to `benchmarks/ispd2005`, then use [this notebook](notebooks/parse_bookshelf.ipynb). (already installed in this repo)
 
 Once the benchmark files have been generated, copy [this config](datasets/graph/config.yaml) into the benchmark directory, and change `val_samples` as needed.
 
 ## Pre-trained Models
-For convenience, we provide the training checkpoint for the *Large+v2* model at [this link](https://drive.google.com/drive/folders/16b8RkVwMqcrlV_55JKwgprv-DevZOX8v?usp=sharing). To use it, copy the `large-v2` directory into your `logs` directory and specify `from_checkpoint` accordingly when running the commands above. 
+For convenience, we provide the training checkpoint for the *Large+v2* model at [this link](https://drive.google.com/drive/folders/16b8RkVwMqcrlV_55JKwgprv-DevZOX8v?usp=sharing). To use it, copy the `large-v2` directory into your `logs` directory and specify `from_checkpoint` accordingly when running the commands above. (already installed in this repo) 
 
 Note that if the checkpoint loads correctly, the code will print `successfully loaded state dict for model` before running training or evaluation; otherwise, `successfully loaded model` will be printed instead, and the code will default to random model weights. Hyperparameter mismatch is a common cause of failure, and we provide the training config used for reference.
-
-## Citation
-If you found our work useful, please cite:
-```
-@inproceedings{
-      lee2025chipdiffusion,
-      title={Chip Placement with Diffusion Models},
-      author={Vint Lee and Minh Nguyen and Leena Elzeiny and Chun Deng and Pieter Abbeel and John Wawrzynek},
-      booktitle={Forty-second International Conference on Machine Learning},
-      year={2025},
-      url={https://arxiv.org/abs/2407.12282}
-}
-```
