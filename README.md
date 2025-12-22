@@ -120,6 +120,10 @@ Example (PowerShell):
 $env:PYTHONPATH="."
 python diffusion/sa_hybrid.py task=ispd2005-s0 sa_mode=hybrid sa_steps=500 temp_init=1.0 temp_decay=0.995 diffusion.k_steps=8 diffusion.noise_level=0.1
 ```
+Example (PowerShell, explicit model path):
+```
+python diffusion/sa_hybrid.py task=vertex_0.7x.61 sa_mode=hybrid sa_steps=500 temp_init=1.0 temp_decay=0.995 diffusion.mode=cont diffusion.k_steps=8 diffusion.noise_level=0.1 diffusion.model_path="d:/eda_final/chip_diffusion/logs/diffusion_debug/large-v2/large-v2.ckpt"
+```
 Use `sa_mode=sa_only` to disable diffusion moves, or set `diffusion.model_path` to point at a saved model.
 
 ### Visualize Placement Pickles

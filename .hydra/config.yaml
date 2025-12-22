@@ -1,4 +1,4 @@
-task: ispd2005-s0
+task: vertex_0.7x.61
 sa_mode: hybrid
 sa_steps: 500
 temp_init: 1.0
@@ -18,7 +18,7 @@ weights:
   macro_legality: 1.0
   congestion: 0.0
 diffusion:
-  mode: cond
+  mode: cont
   k_steps: 8
   noise_level: 0.1
   interval: 25

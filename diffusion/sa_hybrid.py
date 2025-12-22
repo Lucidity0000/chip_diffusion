@@ -4,12 +4,18 @@ import math
 import os
 import random
 import pickle
+import sys
 from typing import Dict, Any
 
 import hydra
 import numpy as np
 import torch
 from omegaconf import DictConfig, OmegaConf, open_dict
+
+# Ensure repo root is on sys.path so imports like utils/common work even when PYTHONPATH is unset.
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 import utils
 from diffusion import policies_hybrid

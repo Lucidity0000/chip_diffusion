@@ -93,17 +93,19 @@ hydra:
     hydra:
     - hydra.mode=RUN
     task:
-    - task=ispd2005-s0
+    - task=vertex_0.7x.61
     - sa_mode=hybrid
     - sa_steps=500
     - temp_init=1.0
     - temp_decay=0.995
+    - diffusion.mode=cont
     - diffusion.k_steps=8
     - diffusion.noise_level=0.1
+    - diffusion.model_path=d:/eda_final/chip_diffusion/logs/diffusion_debug/large-v2/large-v2.ckpt
   job:
     name: sa_hybrid
     chdir: null
-    override_dirname: diffusion.k_steps=8,diffusion.noise_level=0.1,sa_mode=hybrid,sa_steps=500,task=ispd2005-s0,temp_decay=0.995,temp_init=1.0
+    override_dirname: diffusion.k_steps=8,diffusion.mode=cont,diffusion.model_path=d:/eda_final/chip_diffusion/logs/diffusion_debug/large-v2/large-v2.ckpt,diffusion.noise_level=0.1,sa_mode=hybrid,sa_steps=500,task=vertex_0.7x.61,temp_decay=0.995,temp_init=1.0
     id: ???
     num: ???
     config_name: config_sa_hybrid
